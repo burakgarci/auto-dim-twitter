@@ -1,0 +1,67 @@
+// ==UserScript==
+// @name         Auto Dim Twitter
+// @namespace    https://burakgarci.net
+// @version      1.0
+// @description  Toggles the Twitter web dark mode based on the selected hour range
+// @author       Burak Garcı
+// @match        https://twitter.com/*
+// @icon         https://www.google.com/s2/favicons?domain=twitter.com
+// @grant        GM_getValue
+// @grant        GM_setValue
+// @grant        GM_registerMenuCommand
+// @run-at       document-start
+// ==/UserScript==
+
+(function () {
+    'use strict';
+
+    // Default hour range
+    var defaultStartHour = 19; // Set the start hour here (in 24-hour format)
+    var defaultEndHour = 8; // Set the end hour here (in 24-hour format)
+
+    // Check for stored hours
+    var storedStartHour = parseInt(GM_getValue('startHour'));
+    var storedEndHour = parseInt(GM_getValue('endHour'));
+
+    // Use default hours if no stored hours found
+    var startHour = !isNaN(storedStartHour) ? storedStartHour : defaultStartHour;
+    var endHour = !isNaN(storedEndHour) ? storedEndHour : defaultEndHour;
+
+    // Create menu command for user to change settings
+    GM_registerMenuCommand('Set Hour Range', setHourRange);
+
+    // Function to set hour range
+    function setHourRange() {
+        var inputStartHour = prompt('Enter the start hour (in 24-hour format):', startHour);
+        var inputEndHour = prompt('Enter the end hour (in 24-hour format):', endHour);
+
+        if (inputStartHour !== null && inputEndHour !== null) {
+            var parsedStartHour = parseInt(inputStartHour);
+            var parsedEndHour = parseInt(inputEndHour);
+
+            if (!isNaN(parsedStartHour) && !isNaN(parsedEndHour)) {
+                startHour = parsedStartHour;
+                endHour = parsedEndHour;
+                GM_setValue('startHour', startHour);
+                GM_setValue('endHour', endHour);
+                applyDarkMode();
+            } else {
+                alert('Invalid hour value!');
+            }
+        }
+    }
+
+    // Function to apply dark mode based on hour range
+    function applyDarkMode() {
+        var currentHour = new Date().getHours();
+
+        if (currentHour >= startHour || currentHour < endHour) {
+            document.cookie = 'night_mode=1; path=/; secure; domain=.twitter.com';
+        } else {
+            document.cookie = 'night_mode=0; path=/; secure; domain=.twitter.com';
+        }
+    }
+
+    // Apply dark mode on initial load
+    applyDarkMode();
+})();
