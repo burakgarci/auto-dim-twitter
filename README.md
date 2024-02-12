@@ -10,7 +10,13 @@ Auto Dim Twitter is a Tampermonkey user script that automatically enables the di
 
 ## Installation
 
-1. Install the Tampermonkey extension in your web browser.
+### Easy
+1. Install the [Tampermonkey](https://www.tampermonkey.net/) extension in your web browser.
+2. Navigate to installation script hosted in [Greasy Fork](https://update.greasyfork.org/scripts/433450/Auto%20Dim%20Twitter.user.js) and click on the *install* button
+3. Visit [twitter.com](https://twitter.com) and the script will automatically activate the dim theme.
+
+### Manual
+1. Install the [Tampermonkey](https://www.tampermonkey.net/) extension in your web browser.
 2. Click on the Tampermonkey icon in your browser toolbar and create a new script.
 3. Copy and paste the script code from the [Auto Dim Twitter user script](https://github.com/burakgarci/auto-dim-twitter/blob/main/auto-dim-twitter.user.js) into the Tampermonkey editor.
 4. Save the script.
