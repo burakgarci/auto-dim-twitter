@@ -4,8 +4,8 @@
 // @version      1.0
 // @description  Toggles the Twitter web dark mode based on the selected hour range
 // @author       Burak Garcı
-// @match        https://twitter.com/*
-// @icon         https://www.google.com/s2/favicons?domain=twitter.com
+// @match        https://x.com/*
+// @icon         https://www.google.com/s2/favicons?domain=x.com
 // @grant        GM_getValue
 // @grant        GM_setValue
 // @grant        GM_registerMenuCommand
@@ -56,9 +56,9 @@
         var currentHour = new Date().getHours();
 
         if (currentHour >= startHour || currentHour < endHour) {
-            document.cookie = 'night_mode=1; path=/; secure; domain=.twitter.com';
+            document.cookie = 'night_mode=1; path=/; secure; domain=.x.com';
         } else {
-            document.cookie = 'night_mode=0; path=/; secure; domain=.twitter.com';
+            document.cookie = 'night_mode=0; path=/; secure; domain=.x.com';
         }
     }
 
